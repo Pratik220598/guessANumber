@@ -8,38 +8,38 @@ import NumberContainer from '../components/NumberContainer';
 
 const StartingScreen = props => {
 
-    const [enteredValue, setEnteredValue] = useState("");
+    const [input, setInput] = useState("");
     const [confirmed, setConfirmed] = useState(false);
     const [selectedNumber, setSelectedNumber] = useState();
 
-    const handleInput = inputText => {
-        setEnteredValue(inputText);
+    const handleInput = num => {
+        setInput(num);
     };
 
     const handleReset = () => {
-        setEnteredValue("");
+        setInput("");
+        setConfirmed(false);
+    };
+
+    const confirmInputHandler = () => {
+        const chosenNumber = parseInt(input);
+        setConfirmed(true);
+        setSelectedNumber(chosenNumber);
+        Keyboard.dismiss();
     };
 
     let output;
-
     if (confirmed) {
         output = (
             <Card style={styles.container}>
                 <Text style={{ textAlign: 'center', fontSize: 18 }}>You selected: </Text>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Text style={styles.button} color={colours.lightPurple} onPress={() => props.onStartGame(selectedNumber)}>
+                <Text style={styles.button}  onPress={() => props.onStartGame(selectedNumber)}>
                     START GAME
                 </Text>
             </Card>
         );
     }
-
-    const confirmInputHandler = () => {
-        const chosenNumber = parseInt(enteredValue);
-        setConfirmed(true);
-        setSelectedNumber(chosenNumber);
-        Keyboard.dismiss();
-    };
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
@@ -51,14 +51,15 @@ const StartingScreen = props => {
                         style={styles.input}
                         maxLength={2}
                         onChangeText={handleInput}
-                        value={enteredValue}
+                        value={input}
                         keyboardType="numeric"
+                        
                     />
                     <View style={styles.buttonContainer}>
-                        <Text style={styles.button} color={colours.lightPurple} onPress={handleReset}>
+                        <Text style={styles.button}  onPress={handleReset}>
                             Reset
                         </Text>
-                        <Text style={styles.button} color={colours.lightPurple} onPress={confirmInputHandler}>
+                        <Text style={styles.button}  onPress={confirmInputHandler}>
                             Confirm
                         </Text>
                     </View>

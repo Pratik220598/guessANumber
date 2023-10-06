@@ -9,28 +9,28 @@ import LastScreen from './screens/lastScreen';
 
 export default function App() {
 const [userNumber, setUserNumber] = useState();
-const [guessRounds, setGuessRounds] = useState(0);
+const [guess, setGuess] = useState(0);
+
+const startGameHandler = num => {
+  setUserNumber(num);
+  setGuess(0);
+};
+
+const gameOverHandler = Rounds => {
+  setGuess(Rounds);
+};
 
 const newGameHandler = () => {
-  setGuessRounds(0);
+  setGuess(0);
   setUserNumber(0);
 }
 
-const startGameHandler = selectedNumber => {
-  setUserNumber(selectedNumber);
-  setGuessRounds(0);
-};
-
-const gameOverHandler = numOfRounds => {
-  setGuessRounds(numOfRounds);
-};
-
 let content = <StartingScreen onStartGame={startGameHandler} />;
 
-if (userNumber && guessRounds <= 0) {
+if (userNumber && guess <= 0) {
   content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler}/>;
-} else if (guessRounds > 0){
-  content = <LastScreen guessNum={guessRounds} userNum={userNumber} onRestart={newGameHandler}/>;
+} else if (guess > 0){
+  content = <LastScreen guessNum={guess} userNum={userNumber} onRestart={newGameHandler}/>;
 }
 
   return (
