@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Card from '../components/Card';
 import colours from '../constants/colours';
 
 const LastScreen = props => {
     return(
-        <View style={styles.screen}>
+        <ScrollView>
+            <View style={styles.screen}>
             <Text style={{textAlign:'center', fontSize:28, color:colours.red,fontWeight:'bold'}}>Game Over</Text>
             <Card style={styles.card}>
                     <View style={styles.container}>
@@ -17,6 +18,7 @@ const LastScreen = props => {
                 </View>
             </Card>
         </View>
+        </ScrollView>
     );
 };
 

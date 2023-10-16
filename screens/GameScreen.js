@@ -50,7 +50,8 @@ const GameScreen = props => {
   
 
     return (
-        <View style={styles.screen}>
+        <ScrollView>
+            <View style={styles.screen}>
             <Text style={{ textAlign: 'center', fontSize: 18 }}>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
@@ -67,6 +68,7 @@ const GameScreen = props => {
           )}
             </ScrollView>
         </View>
+        </ScrollView>
     );
             }
 
